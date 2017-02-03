@@ -8,6 +8,12 @@ object Main {
         print(pascal(col, row) + " ")
       println()
     }
+
+    println("Matching Parentheses")
+    println(balance("(if (zero? x) max (/ 1 x))".toList))
+    println(balance("())(".toList))
+    println(balance(":-)".toList))
+
   }
 
   /**
@@ -38,7 +44,7 @@ object Main {
     * (if (zero? x) max (/ 1 x))
     * I told him (that it’s not (yet) done). (But he wasn’t listening)
     * The function should return false for the following strings:
-    * *
+    *
     * :-)
     * ())(
     * The last example shows that it’s not enough to verify that a string
@@ -46,11 +52,36 @@ object Main {
     *
     */
   def balance(chars: List[Char]): Boolean = {
+    def checkParentheses(balance: Int, characters: List[Char]): Int = {
+      if (balance < 0 || characters.isEmpty)
+        balance
+      else {
+        if (characters.head == '(')
+          checkParentheses(balance + 1, characters.tail)
+        else
+        if (characters.head == ')')
+          checkParentheses(balance - 1, characters.tail)
+        else
+        checkParentheses(balance, characters.tail)
+      }
+    }
+
+    checkParentheses(0, chars) == 0
 
   }
 
   /**
     * Exercise 3
+    * Write a recursive function that counts how many different ways you
+    * can make change for an amount, given a list of coin denominations.
+    * For example, there are 3 ways to give change for 4 if you have coins
+    * with denomination 1 and 2: 1+1+1+1, 1+1+2, 2+2.
+    *
+    * Hint: Think of the degenerate cases.
+    * How many ways can you give change for 0 CHF(swiss money)?
+    * How many ways can you give change for >0 CHF, if you have no coins?
     */
-  def countChange(money: Int, coins: List[Int]): Int = ???
+  def countChange(money: Int, coins: List[Int]): Int = {
+
+  }
 }
