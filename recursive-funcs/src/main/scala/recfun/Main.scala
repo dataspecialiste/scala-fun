@@ -14,6 +14,9 @@ object Main {
     println(balance("())(".toList))
     println(balance(":-)".toList))
 
+    println("Counting Coins")
+    println(countChange(3, List(2, 1)))
+
   }
 
   /**
@@ -82,6 +85,14 @@ object Main {
     * How many ways can you give change for >0 CHF, if you have no coins?
     */
   def countChange(money: Int, coins: List[Int]): Int = {
+    if (money < 0 || coins.isEmpty)
+      return 0
+    else {
+      if (money == 0)
+        return 1
+    }
+
+    countChange(money - coins.head, coins) + countChange(money, coins.tail)
 
   }
 }
