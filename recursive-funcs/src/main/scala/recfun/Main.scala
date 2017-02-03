@@ -61,11 +61,10 @@ object Main {
       else {
         if (characters.head == '(')
           checkParentheses(balance + 1, characters.tail)
-        else
-        if (characters.head == ')')
+        else if (characters.head == ')')
           checkParentheses(balance - 1, characters.tail)
         else
-        checkParentheses(balance, characters.tail)
+          checkParentheses(balance, characters.tail)
       }
     }
 
@@ -86,13 +85,11 @@ object Main {
     */
   def countChange(money: Int, coins: List[Int]): Int = {
     if (money < 0 || coins.isEmpty)
-      return 0
-    else {
-      if (money == 0)
-        return 1
-    }
-
-    countChange(money - coins.head, coins) + countChange(money, coins.tail)
+      0
+    else
+    if (money == 0) 1
+    else
+      countChange(money - coins.head, coins) + countChange(money, coins.tail)
 
   }
 }
