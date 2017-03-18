@@ -18,3 +18,6 @@ project/plugins/project/
 
 # Intellij Specific
 .idea/
+
+# Non Free Books 
+/Scala Books and Resources/*
