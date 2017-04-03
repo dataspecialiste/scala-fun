@@ -79,3 +79,50 @@ object Draw {
 Draw(Circle(10))
 
 // Exercise 4.2.2.2
+sealed trait Color {
+  def red: Double
+  def green: Double
+  def blue: Double
+
+  // We decided to define a "light" colour as one with
+  // an average RGB of more than 0.5:
+  def isLight: Boolean = (red + green + blue) / 3.0 > 0.5
+  def isDark: Boolean = !isLight
+}
+
+final object Red extends Color {
+  val red = 255
+  val green = 0
+  val blue = 0
+}
+
+final case class CustomColor(red: Double, green: Double, blue: Double) extends Color
+
+// Exercise 4.2.2.3
+sealed trait DivisionResult {
+  def result: String
+}
+
+class Finite(value: Int) extends DivisionResult {
+  val result = s"Finite($value)"
+
+  override def toString: String = result
+}
+
+class Infinite extends DivisionResult {
+  val result = "Infinite"
+
+  override def toString: String = result
+}
+
+object divide {
+  def apply(numerator: Int, denominator: Int): DivisionResult = {
+    if (denominator == 0)
+      new Infinite
+    else
+      new Finite(numerator / denominator)
+  }
+}
+
+divide(10, 5)
+divide(10, 0)
